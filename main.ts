@@ -5,24 +5,6 @@ namespace SpriteKind {
     export const Pet = SpriteKind.create()
     export const NPC = SpriteKind.create()
 }
-function KLEARKOIN2 () {
-    sprites.destroy(MYKOIN2, effects.confetti, 500)
-}
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite2, location) {
-    game.showLongText("WELL DONE... YOU FOUND A COIN CHEST!", DialogLayout.Bottom)
-    coins += randint(0, 25)
-    tiles.setCurrentTilemap(tilemap`level25`)
-    pause(2000)
-    game.showLongText("Penny: Hey Adventurer... The New Update Will Be Coming Out Soon... You Can Download It When It Releases At: CoinPetAdventure.co.uk But For Now You Can Replay The Game.", DialogLayout.Bottom)
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite5, location2) {
-    BouncyBoll2 = sprites.create(assets.image`myImage2`, SpriteKind.BouncyBoll)
-    tiles.setCurrentTilemap(tilemap`level0`)
-    hero.setPosition(138, 210)
-    clearlevel()
-    tiles.placeOnTile(BouncyBoll2, tiles.getTileLocation(5, 5))
-    game.showLongText("Hmmm... What's in here?", DialogLayout.Bottom)
-})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     hero.setImage(assets.image`snakyboi`)
     animation.stopAnimation(animation.AnimationTypes.All, hero)
@@ -34,25 +16,15 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     )
     info.setScore(coins)
 })
-function ForestLvL01 () {
-    tiles.setCurrentTilemap(tilemap`level34`)
-    Beevah = sprites.create(assets.image`Beevah`, SpriteKind.NPC)
-    Beevah.setPosition(54, 58)
-    hero.setPosition(0, 0)
+function KLEARKOIN2 () {
+    sprites.destroy(MYKOIN2, effects.confetti, 500)
 }
-controller.up.onEvent(ControllerButtonEvent.Released, function () {
-    hero.setImage(assets.image`myImage0`)
-    animation.runImageAnimation(
-    hero,
-    assets.animation`myAnim`,
-    500,
-    true
-    )
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.KOIN2, function (sprite, otherSprite) {
-    KLEARKOIN2()
-    game.splash("YOU FOUND A COIN!")
-    coins += 1
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite2, location) {
+    game.showLongText("WELL DONE... YOU FOUND A COIN CHEST!", DialogLayout.Bottom)
+    coins += randint(0, 25)
+    tiles.setCurrentTilemap(tilemap`level25`)
+    pause(2000)
+    game.showLongText("Penny: Hey Adventurer... The New Update Will Be Coming Out Soon... You Can Download It When It Releases At: CoinPetAdventure.co.uk But For Now You Can Replay The Game.", DialogLayout.Bottom)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.BouncyBoll, function (sprite3, otherSprite2) {
     game.showLongText("WOULD YOU LIKE TO TRADE THE BOUNCY BALL FOR ONE COIN?", DialogLayout.Bottom)
@@ -75,32 +47,35 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.BouncyBoll, function (sprite3, o
         game.showLongText("The bouncy ball bounces between dimensions, teleporting you to a completely different world! Why not give it a try? What other us", DialogLayout.Bottom)
     }
 })
-function KLEARKOIN () {
-    sprites.destroy(MY_KOIN, effects.confetti, 500)
+sprites.onOverlap(SpriteKind.Player, SpriteKind.KOIN2, function (sprite, otherSprite) {
+    KLEARKOIN2()
+    game.splash("YOU FOUND A COIN!")
+    coins += 1
+})
+function ForestLvL01 () {
+    tiles.setCurrentTilemap(tilemap`level34`)
+    Beevah = sprites.create(assets.image`Beevah`, SpriteKind.NPC)
+    Beevah.setPosition(54, 58)
+    hero.setPosition(0, 0)
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    hero.setImage(assets.image`snakyboi`)
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    hero.setImage(assets.image`myImage`)
     animation.stopAnimation(animation.AnimationTypes.All, hero)
     animation.runImageAnimation(
     hero,
-    assets.animation`myAnim`,
+    assets.animation`myAnim1`,
     500,
     true
     )
     info.setScore(coins)
 })
-function clearlevel () {
-    sprites.destroy(MY_KOIN)
-    sprites.destroy(MYKOIN2)
-}
-controller.left.onEvent(ControllerButtonEvent.Released, function () {
-    hero.setImage(assets.image`myImage0`)
-    animation.runImageAnimation(
-    hero,
-    assets.animation`myAnim`,
-    500,
-    true
-    )
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite5, location2) {
+    BouncyBoll2 = sprites.create(assets.image`myImage2`, SpriteKind.BouncyBoll)
+    tiles.setCurrentTilemap(tilemap`level0`)
+    hero.setPosition(138, 210)
+    clearlevel()
+    tiles.placeOnTile(BouncyBoll2, tiles.getTileLocation(5, 5))
+    game.showLongText("Hmmm... What's in here?", DialogLayout.Bottom)
 })
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     hero.setImage(assets.image`myImage0`)
@@ -111,17 +86,60 @@ controller.right.onEvent(ControllerButtonEvent.Released, function () {
     true
     )
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.KOIN, function (sprite4, otherSprite3) {
-    KLEARKOIN()
-    game.splash("YOU FOUND A COIN!")
-    coins += 1
+controller.left.onEvent(ControllerButtonEvent.Released, function () {
+    hero.setImage(assets.image`myImage0`)
+    animation.runImageAnimation(
+    hero,
+    assets.animation`myAnim`,
+    500,
+    true
+    )
 })
+info.onScore(2, function () {
+    if (info.highScore() == 2) {
+        game.showLongText("WELL DONE... YOU FOUND ALL THE COINS! NOW MAYBE WE SHOULD FIND OUT WHAT IS INSIDE THAT HOUSE...", DialogLayout.Bottom)
+    } else {
+        pause(100)
+    }
+})
+function KLEARKOIN () {
+    sprites.destroy(MY_KOIN, effects.confetti, 500)
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     hero.setImage(assets.image`myImage`)
     animation.stopAnimation(animation.AnimationTypes.All, hero)
     animation.runImageAnimation(
     hero,
     assets.animation`myAnim2`,
+    500,
+    true
+    )
+    info.setScore(coins)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.KOIN, function (sprite4, otherSprite3) {
+    KLEARKOIN()
+    game.splash("YOU FOUND A COIN!")
+    coins += 1
+})
+function clearlevel () {
+    sprites.destroy(MY_KOIN)
+    sprites.destroy(MYKOIN2)
+}
+controller.up.onEvent(ControllerButtonEvent.Released, function () {
+    hero.setImage(assets.image`myImage0`)
+    animation.runImageAnimation(
+    hero,
+    assets.animation`myAnim`,
+    500,
+    true
+    )
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    hero.setImage(assets.image`snakyboi`)
+    animation.stopAnimation(animation.AnimationTypes.All, hero)
+    animation.runImageAnimation(
+    hero,
+    assets.animation`myAnim`,
     500,
     true
     )
@@ -161,24 +179,6 @@ function PETDIALOUGEDOGGYONE () {
     tiles.setCurrentTilemap(tilemap`level21`)
     Maze()
 }
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    hero.setImage(assets.image`myImage`)
-    animation.stopAnimation(animation.AnimationTypes.All, hero)
-    animation.runImageAnimation(
-    hero,
-    assets.animation`myAnim1`,
-    500,
-    true
-    )
-    info.setScore(coins)
-})
-info.onScore(2, function () {
-    if (info.highScore() == 2) {
-        game.showLongText("WELL DONE... YOU FOUND ALL THE COINS! NOW MAYBE WE SHOULD FIND OUT WHAT IS INSIDE THAT HOUSE...", DialogLayout.Bottom)
-    } else {
-        pause(100)
-    }
-})
 let doggy: Sprite = null
 let Beevah: Sprite = null
 let BouncyBoll2: Sprite = null
